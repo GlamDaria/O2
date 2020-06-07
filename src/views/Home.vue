@@ -6,6 +6,7 @@
         :key="item.id"
         :item="item"
         @click="openItemPage(item)"
+        @addToCart="addToCart(item)"
       />
     </div>
   </div>
@@ -31,6 +32,10 @@ export default {
     openItemPage({ id }) {
       console.log("router push", { id });
       this.$router.push({ name: "Product", params: { id: id } });
+    },
+    addToCart(product) {
+      console.log(product);
+      this.$store.dispatch("addCartItem", product);
     }
   }
 };

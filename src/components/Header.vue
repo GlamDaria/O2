@@ -1,6 +1,6 @@
 <template>
   <div class="header main-container">
-    <div class="header__logo">Logo</div>
+    <div @click="$router.push('/')" class="header__logo">Logo</div>
     <div class="header__content">
       <a-input-search
         v-model="search"
@@ -10,7 +10,7 @@
       />
     </div>
     <div class="header__action-list">
-      <a-button type="primary" class="header__button">
+      <a-button type="primary" class="header__button" @click="go('Cart')">
         Корзина
       </a-button>
 
@@ -27,6 +27,9 @@ export default {
   methods: {
     onSearch() {
       console.log(this.search);
+    },
+    go(routeName) {
+      this.$router.push({ name: routeName });
     }
   },
   data: () => {
@@ -52,6 +55,7 @@ export default {
   align-self: baseline;
   font-weight: bold;
   color: $main-color;
+  cursor: pointer;
 }
 .header__content {
   flex-grow: 1;

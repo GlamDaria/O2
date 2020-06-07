@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import ItemManager from "./modules/ItemManager";
+import itemManager from "./modules/itemManager";
+import cartManager from "./modules/cartManager";
 
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: {
-    ItemManager
+    itemManager,
+    cartManager
   }
 });

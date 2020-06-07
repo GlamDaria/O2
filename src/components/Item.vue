@@ -9,7 +9,11 @@
       <div class="item__price">{{ item.price }} ₽</div>
     </div>
 
-    <a-button @click="addToCart" type="primary" class="item__button">
+    <a-button
+      @click="$emit('addToCart', item)"
+      type="primary"
+      class="item__button"
+    >
       В корзину
     </a-button>
   </div>
@@ -24,11 +28,7 @@ export default {
       required: true
     }
   },
-  methods: {
-    addToCart() {
-      console.log("add to cart", this.item);
-    }
-  },
+  methods: {},
   computed: {}
 };
 </script>
