@@ -1,5 +1,5 @@
 <template>
-  <div class="main-menu">
+  <div class="main-menu main-container">
     <div
       v-for="(item, index) in MenuList"
       :key="index"

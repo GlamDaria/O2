@@ -1,10 +1,14 @@
 <template>
   <div v-if="item" class="item">
-    <div class="item__image">
+    <div @click="$emit('click', item)" class="item__image">
       <img :src="item.imageURL" />
     </div>
-    <div class="item__name">{{ item.name }}</div>
-    <div class="item__price">{{ item.price }} ₽</div>
+
+    <div class="item__info" @click="$emit('click', item)">
+      <div class="item__name">{{ item.name }}</div>
+      <div class="item__price">{{ item.price }} ₽</div>
+    </div>
+
     <a-button @click="addToCart" type="primary" class="item__button">
       В корзину
     </a-button>
@@ -36,6 +40,10 @@ export default {
   &:not(:last-child) {
     margin-right: 24px;
   }
+}
+
+.item__info {
+  cursor: pointer;
 }
 .item__name {
   margin-top: 8px;

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header />
+    <MainMenu />
     <div class="main">
       <router-view />
     </div>
@@ -10,12 +11,14 @@
 <script>
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MainMenu from "@/components/MainMenu";
 // import styles from "@/styles/index.scss";
 
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    MainMenu
   }
 };
 </script>

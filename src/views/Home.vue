@@ -1,21 +1,22 @@
 <template>
   <div class="main-container">
-    <MainMenu />
     <div class="main-item-list">
-      <Item v-for="item in itemList" :key="item.id" :item="item" />
+      <Item
+        v-for="item in itemList"
+        :key="item.id"
+        :item="item"
+        @click="openItemPage(item)"
+      />
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import MainMenu from "@/components/MainMenu.vue";
 import Item from "@/components/Item.vue";
 
 export default {
   name: "Home",
   components: {
-    MainMenu,
     Item
   },
   created() {
@@ -24,6 +25,12 @@ export default {
   computed: {
     itemList() {
       return this.$store.getters.getItemList;
+    }
+  },
+  methods: {
+    openItemPage({ id }) {
+      console.log("router push", { id });
+      this.$router.push({ name: "Product", params: { id: id } });
     }
   }
 };
