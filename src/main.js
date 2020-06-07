@@ -3,9 +3,14 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import { DatePicker } from 'ant-design-vue';
-Vue.use(DatePicker);
+import "ant-design-vue/dist/antd.css";
+import "./styles/index.scss";
 
+import { Button } from "ant-design-vue";
+import { Input } from "ant-design-vue";
+
+Vue.use(Button);
+Vue.use(Input);
 
 Vue.config.productionTip = false;
 
