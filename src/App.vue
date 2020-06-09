@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header />
-    <MainMenu />
+    <MainMenu v-if="false" />
     <div class="main">
       <router-view />
     </div>

@@ -9,10 +9,12 @@ import "./styles/index.scss";
 import { Button } from "ant-design-vue";
 import { Input } from "ant-design-vue";
 import { InputNumber } from "ant-design-vue";
+import { FormModel } from "ant-design-vue";
 
 Vue.use(Button);
 Vue.use(Input);
 Vue.use(InputNumber);
+Vue.use(FormModel);
 
 Vue.config.productionTip = false;
 
