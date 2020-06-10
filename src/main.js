@@ -10,11 +10,17 @@ import { Button } from "ant-design-vue";
 import { Input } from "ant-design-vue";
 import { InputNumber } from "ant-design-vue";
 import { FormModel } from "ant-design-vue";
+import { Form } from "ant-design-vue";
+import { Icon } from "ant-design-vue";
+import { Modal } from "ant-design-vue";
 
 Vue.use(Button);
 Vue.use(Input);
 Vue.use(InputNumber);
 Vue.use(FormModel);
+Vue.use(Form);
+Vue.use(Icon);
+Vue.use(Modal);
 
 Vue.config.productionTip = false;
 

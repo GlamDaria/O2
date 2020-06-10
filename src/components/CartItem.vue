@@ -10,16 +10,15 @@
 
     <div class="cart-item__count">
       <a-input-number
-        id="inputNumber"
-        v-model="item.count"
+        :value="item.count"
         :min="0"
         :max="100"
-        @change="onChange"
+        @change="onChange($event)"
       />
     </div>
 
     <div>
-      <a-button icon="delete" size="large" />
+      <a-button @click="removeItem(item)" icon="delete" size="large" />
     </div>
   </div>
 </template>
@@ -38,8 +37,14 @@ export default {
     };
   },
   methods: {
-    onChange(value) {
-      console.log("changed", value);
+    onChange(newValue) {
+      this.$store.commit("setCartItemCount", {
+        product: this.item,
+        count: newValue
+      });
+    },
+    removeItem(item) {
+      this.$store.commit("removeCartItem", item);
     }
   }
 };

@@ -1,11 +1,15 @@
 export default {
   state: {
     user: null,
-    registrationError: null
+    registrationError: null,
+    openAuthPopup: false
   },
   getters: {
     getUser(state) {
       return state.user;
+    },
+    isOpenPopup(state) {
+      return state.openAuthPopup;
     }
   },
   mutations: {
@@ -14,14 +18,23 @@ export default {
     },
     setRegistrationError(state, error) {
       state.registrationError = error;
+    },
+    setOpenPopup(state, value) {
+      state.openAuthPopup = value;
     }
   },
   actions: {
     signUp({ commit }, { email, password }) {
       console.log("email", email);
       console.log("password", password);
-      const user = { id: 1 };
-      commit("setUser", user);
+
+      return new Promise(resolve => {
+        setTimeout(() => {
+          const user = { id: 1 };
+          commit("setUser", user);
+          resolve(user);
+        }, 2000);
+      });
     },
     signOut({ commit }) {
       commit("setUser", null);

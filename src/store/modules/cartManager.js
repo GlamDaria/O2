@@ -18,6 +18,10 @@ export default {
       let cartItem = state.cart.find(item => item.id === product.id);
       cartItem.count++;
     },
+    setCartItemCount(state, { product, count }) {
+      let cartItem = state.cart.find(item => item.id === product.id);
+      cartItem.count = count;
+    },
     decrementCartItem(state, product) {
       let cartItem = state.cart.find(item => item.id === product.id);
       cartItem.count--;
@@ -39,8 +43,9 @@ export default {
     addCartItem({ commit, state }, product) {
       if (state.cart && state.cart.find(item => item.id === product.id)) {
         commit("incrementCartItem", product);
+      } else {
+        commit("pushCartItem", product);
       }
-      commit("pushCartItem", product);
     }
   }
 };

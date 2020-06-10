@@ -41,7 +41,9 @@ export default {
     margin-right: 24px;
   }
 }
-
+.item__image {
+  cursor: pointer;
+}
 .item__info {
   cursor: pointer;
 }

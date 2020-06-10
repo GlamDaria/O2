@@ -14,22 +14,40 @@
         Корзина
       </a-button>
 
-      <a-button type="primary" class="header__button">
+      <a-button
+        @click="openAuthPopup(true)"
+        type="primary"
+        class="header__button"
+      >
         Войти
       </a-button>
     </div>
+
+    <LoginPopup :visible="visibleAuthPopup" />
   </div>
 </template>
 
 <script>
+import LoginPopup from "./LoginPopup";
 export default {
   name: "Header",
+  components: {
+    LoginPopup
+  },
+  computed: {
+    visibleAuthPopup() {
+      return this.$store.getters.isOpenPopup;
+    }
+  },
   methods: {
     onSearch() {
       console.log(this.search);
     },
     go(routeName) {
       this.$router.push({ name: routeName });
+    },
+    openAuthPopup(value) {
+      this.$store.commit("setOpenPopup", value);
     }
   },
   data: () => {
