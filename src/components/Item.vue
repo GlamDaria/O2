@@ -14,7 +14,7 @@
       type="primary"
       class="item__button"
     >
-      В корзину
+      {{ actionText }}
     </a-button>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    actionText: {
+      type: String,
+      default: "В корзину"
     }
   },
   methods: {},

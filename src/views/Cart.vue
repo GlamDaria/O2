@@ -9,16 +9,20 @@
       />
     </div>
 
-    <div class="cart-actions">Цена</div>
+    <div class="cart-actions">
+      <CartInfo />
+    </div>
   </div>
 </template>
 
 <script>
 import CartItem from "../components/CartItem";
+import CartInfo from "../components/CartInfo";
 export default {
   name: "Cart",
   components: {
-    CartItem
+    CartItem,
+    CartInfo
   },
   created() {
     // if (localStorage.cart) {
@@ -39,7 +43,7 @@ export default {
   flex-flow: row nowrap;
 }
 .cart-info {
-  flex-grow: 1;
+  flex-grow: 3;
   flex-shrink: 1;
   display: flex;
   flex-direction: column;

@@ -80,8 +80,9 @@ export default {
         price: 100,
         imageURL: "https://cdn1.ozone.ru/s3/multimedia-6/wc250/6007096938.jpg",
         imageFullSizeURL:
-            "https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6007096938.jpg",
-        description: "Vivamus faucibus turpis a nisi feugiat, in accumsan justo pretium. Nunc tellus tortor, consequat bibendum mi eu, lobortis pulvinar felis. Pellentesque eget dui sit amet risus venenatis efficitur. Nullam id diam lobortis, fermentum lorem auctor, venenatis nunc. Morbi blandit laoreet quam in facilisis. Fusce imperdiet dignissim mattis. Integer porta ultricies gravida. Suspendisse a dolor pretium nibh elementum interdum eget quis metus. Donec lobortis dolor sit amet odio elementum, at iaculis lacus commodo. Nam at viverra massa, quis posuere metus"
+          "https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6007096938.jpg",
+        description:
+          "Vivamus faucibus turpis a nisi feugiat, in accumsan justo pretium. Nunc tellus tortor, consequat bibendum mi eu, lobortis pulvinar felis. Pellentesque eget dui sit amet risus venenatis efficitur. Nullam id diam lobortis, fermentum lorem auctor, venenatis nunc. Morbi blandit laoreet quam in facilisis. Fusce imperdiet dignissim mattis. Integer porta ultricies gravida. Suspendisse a dolor pretium nibh elementum interdum eget quis metus. Donec lobortis dolor sit amet odio elementum, at iaculis lacus commodo. Nam at viverra massa, quis posuere metus"
       };
       commit("setItem", item);
     },
@@ -91,7 +92,7 @@ export default {
       dispatch("updateItem");
     },
     removeItem({ dispatch }, item) {
-      console.log("remove item", item);
+      console.log("remove item dispatch", item);
 
       dispatch("updateItem");
     }

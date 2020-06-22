@@ -24,6 +24,26 @@ const routes = [
     path: "/registration",
     name: "Registration",
     component: () => import("../views/Rigistration")
+  },
+  {
+    path: "/history",
+    name: "History",
+    component: () => import("../views/History")
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: () => import("../views/Admin/index")
+  },
+  {
+    path: "/admin/items/:id",
+    name: "EditProduct",
+    component: () => import("../views/Admin/AdminProduct")
+  },
+  {
+    path: "/admin/orders",
+    name: "OrderList",
+    component: () => import("../views/Admin/index")
   }
   // {
   //   path: "/about",

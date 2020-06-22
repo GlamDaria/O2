@@ -1,0 +1,127 @@
+<template>
+  <div class="main-container">
+    <div v-if="editedProduct" class="edit-product">
+      <div class="product__image">
+        <img :src="product.imageFullSizeURL" />
+      </div>
+
+      <div class="product__info">
+        <div class="edit-product__field">
+          <div class="edit-product__title">Название товара</div>
+          <a-input
+            v-model="editedProduct.name"
+            type="text"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="edit-product__field">
+          <div class="edit-product__title">Цена товара (₽)</div>
+          <a-input
+            v-model="editedProduct.price"
+            type="number"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="edit-product__field">
+          <div class="edit-product__title">Миниатюра изображение</div>
+          <a-input
+            v-model="editedProduct.imageURL"
+            type="text"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="edit-product__field">
+          <div class="edit-product__title">Изображение в полном размере</div>
+          <a-input
+            v-model="editedProduct.imageFullSizeURL"
+            type="text"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="edit-product__field">
+          <div class="edit-product__title">Описание товара</div>
+          <a-textarea
+            v-model="editedProduct.description"
+            placeholder="Controlled autosize"
+            :auto-size="{ minRows: 3, maxRows: 5 }"
+          />
+        </div>
+
+        <a-button @click="saveProduct" type="primary" class="product__button">
+          Сохранить
+        </a-button>
+      </div>
+    </div>
+    <div v-else>
+      Loading
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "AdminProduct",
+  created() {
+    this.$store.dispatch("updateItem", this.$route.params.id).then(() => {
+      this.editedProduct = this.product;
+    });
+  },
+  computed: {
+    product() {
+      return this.$store.getters.getItem;
+    }
+  },
+  methods: {
+    saveProduct() {
+      console.log("save", this.editedProduct);
+    }
+  },
+  data() {
+    return {
+      editedProduct: null
+    };
+  }
+};
+</script>
+
+<style lang="scss">
+.edit-product {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.edit-product__title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.edit-product__field {
+  margin-bottom: 16px;
+}
+
+.product__image {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 50%;
+  margin-right: 28px;
+
+  img {
+    width: 100%;
+  }
+}
+
+.product__info {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 50%;
+}
+
+.product__button {
+  margin-top: 24px;
+}
+</style>

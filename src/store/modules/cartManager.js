@@ -7,7 +7,10 @@ export default {
       return state.cart;
     },
     getTotalPrice(state) {
-      return state.cart.reduce((sum, item) => sum + item.price * item.count);
+      if (state.cart.length === 0) return 0;
+      return state.cart.reduce((sum, item) => {
+        return sum + item.price * item.count;
+      }, 0);
     }
   },
   mutations: {
