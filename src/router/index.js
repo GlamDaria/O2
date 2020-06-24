@@ -32,17 +32,27 @@ const routes = [
   },
   {
     path: "/admin",
-    name: "Admin",
+    name: "AdminHome",
+    component: () => import("../views/Admin/index")
+  },
+  {
+    path: "/admin/items",
+    name: "AdminProductList",
     component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/items/:id",
-    name: "EditProduct",
-    component: () => import("../views/Admin/AdminProduct")
+    name: "AdminEditProduct",
+    component: () => import("../views/Admin/AdminProduct/AdminProductEdit")
+  },
+  {
+    path: "/admin/add",
+    name: "AdminAddProduct",
+    component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/orders",
-    name: "OrderList",
+    name: "AdminOrderList",
     component: () => import("../views/Admin/index")
   }
   // {

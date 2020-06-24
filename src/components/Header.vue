@@ -10,9 +10,11 @@
       />
     </div>
     <div class="header__action-list">
-      <a-button type="primary" class="header__button" @click="go('Cart')">
-        Корзина
-      </a-button>
+      <a-badge :count="badgeCount" class="header__button">
+        <a-button type="primary" @click="go('Cart')">
+          Корзина
+        </a-button>
+      </a-badge>
 
       <a-button
         @click="openAuthPopup(true)"
@@ -37,6 +39,9 @@ export default {
   computed: {
     visibleAuthPopup() {
       return this.$store.getters.isOpenPopup;
+    },
+    badgeCount() {
+      return this.$store.getters.getCartItemCount;
     }
   },
   methods: {
@@ -89,7 +94,7 @@ export default {
 }
 .header__button {
   &:not(:last-child) {
-    margin-right: 8px;
+    margin-right: 16px;
   }
 }
 </style>

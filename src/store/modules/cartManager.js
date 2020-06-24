@@ -6,6 +6,12 @@ export default {
     getCartList(state) {
       return state.cart;
     },
+    getCartItemCount(state) {
+      if (state.cart.length === 0) return 0;
+      return state.cart.reduce((sum, item) => {
+        return sum + item.count;
+      }, 0);
+    },
     getTotalPrice(state) {
       if (state.cart.length === 0) return 0;
       return state.cart.reduce((sum, item) => {

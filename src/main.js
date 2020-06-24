@@ -14,6 +14,7 @@ import { Form } from "ant-design-vue";
 import { Icon } from "ant-design-vue";
 import { Modal } from "ant-design-vue";
 import { Menu } from "ant-design-vue";
+import { Badge } from "ant-design-vue";
 
 Vue.use(Button);
 Vue.use(Input);
@@ -23,6 +24,7 @@ Vue.use(Form);
 Vue.use(Icon);
 Vue.use(Modal);
 Vue.use(Menu);
+Vue.use(Badge);
 
 Vue.config.productionTip = false;
 

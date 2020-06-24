@@ -1,13 +1,21 @@
 <template>
   <div class="admin-navigation">
     <a-menu
-      v-model="current"
+      :selectedKeys="current"
       style="width: 256px"
       mode="inline"
       @click="handleClick"
     >
-      <a-menu-item key="orders"> <a-icon type="star" />Заказы </a-menu-item>
-      <a-menu-item key="items"> <a-icon type="shopping" />Товары </a-menu-item>
+      <a-menu-item key="AdminHome"> <a-icon type="home" />Главная </a-menu-item>
+      <a-menu-item key="AdminOrderList">
+        <a-icon type="star" />Заказы
+      </a-menu-item>
+      <a-menu-item key="AdminProductList">
+        <a-icon type="shopping" />Товары
+      </a-menu-item>
+      <a-menu-item key="AdminAddProduct">
+        <a-icon type="plus" />Новый товар
+      </a-menu-item>
     </a-menu>
   </div>
 </template>
@@ -19,18 +27,19 @@ export default {
   created() {
     this.$store.dispatch("updateItemList");
   },
-  computed: {},
+  computed: {
+    current() {
+      return [this.$route.name];
+    }
+  },
   methods: {
     handleClick(click) {
       console.log(click);
-      if (click.key === "orders") this.$router.push({ name: "Admin" });
-      if (click.key === "items") this.$router.push({ name: "OrderList" });
+      this.$router.push({ name: click.key });
     }
   },
   data: () => {
-    return {
-      current: ["orders"]
-    };
+    return {};
   }
 };
 </script>

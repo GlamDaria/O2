@@ -1,29 +1,15 @@
 <template>
   <div class="main-container">
-    <h1>Заказы</h1>
-    <div v-if="orderList" class="edit-product"></div>
-    <div v-else>
-      Loading
-    </div>
+    <h1>Главная страница</h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "AdminOrders",
-  created() {
-    this.$store.dispatch("updateOrderList").then(() => {});
-  },
-  computed: {
-    orderList() {
-      return this.$store.getters.getOrderList;
-    }
-  },
-  methods: {
-    changeOrderStatus() {
-      console.log("change order status");
-    }
-  },
+  name: "AdminHome",
+  created() {},
+  computed: {},
+  methods: {},
   data() {
     return {
       editedProduct: null

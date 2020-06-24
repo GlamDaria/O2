@@ -6,6 +6,7 @@ import itemManager from "./modules/itemManager";
 import cartManager from "./modules/cartManager";
 import authManager from "./modules/authManager";
 import historyManager from "./modules/historyManager";
+import orderManager from "./modules/orderManager";
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     itemManager,
     cartManager,
     authManager,
-    historyManager
+    historyManager,
+    orderManager
   }
 });

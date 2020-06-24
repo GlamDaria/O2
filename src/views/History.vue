@@ -30,10 +30,10 @@ export default {
     }
   },
   methods: {
-    openItemPage({ id }) {
-      console.log("router push", { id });
-      this.$router.push({ name: "Product", params: { id: id } });
-    }
+    // openItemPage({ id }) {
+    //   console.log("router push", { id });
+    //   this.$router.push({ name: "Product", params: { id: id } });
+    // }
     // addToCart(product) {
     //   console.log(product);
     //   this.$store.dispatch("addCartItem", product);

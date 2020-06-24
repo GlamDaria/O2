@@ -4,50 +4,41 @@
       <Navigation />
     </div>
     <div class="main-container admin-main__container">
-      <div class="main-item-list">
-        <Item
-          v-for="item in itemList"
-          :key="item.id"
-          :item="item"
-          actionText="Удалить"
-          @click="openItemPage(item)"
-          @addToCart="remove(item)"
-        />
-      </div>
+      <component :is="currentPage" />
     </div>
-
-    <Orders v-if="false" />
-    <Product v-if="false" />
   </div>
 </template>
 
 <script>
-import Item from "@/components/Item.vue";
 import Navigation from "./AdminNavigation";
-import Orders from "./AdminOrders";
-import Product from "./AdminProduct";
+import Home from "./AdminHome";
+import OrderList from "./AdminOrders";
+import ProductList from "./AdminProduct/index";
+import AddProduct from "./AdminAddProduct";
 
 export default {
   name: "Admin",
   components: {
-    Item,
     Navigation,
-    Orders,
-    Product
+    OrderList,
+    ProductList,
+    AddProduct,
+    Home
   },
   created() {
     this.$store.dispatch("updateItemList");
   },
   computed: {
-    itemList() {
-      return this.$store.getters.getItemList;
+    currentPage() {
+      return {
+        AdminHome: "Home",
+        AdminProductList: "ProductList",
+        AdminOrderList: "OrderList",
+        AdminAddProduct: "AddProduct"
+      }[this.$route.name];
     }
   },
   methods: {
-    openItemPage({ id }) {
-      console.log("router push", { id });
-      this.$router.push({ name: "EditProduct", params: { id: id } });
-    },
     remove(product) {
       console.log("remove", product);
       this.$store.dispatch("removeItem", product);
