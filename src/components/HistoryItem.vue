@@ -2,7 +2,7 @@
   <div v-if="item" class="history-item">
     <div class="history-item__header">
       <div class="history-item__createdAt">
-        {{ parseDate(item.createdAt) }}
+        {{ $moment.unix(item.createdAt).format('LLL') }}
       </div>
       <div class="history-item__price">{{ item.price }} ₽</div>
       <div class="history-item__status">
@@ -37,15 +37,6 @@ export default {
     }
   },
   methods: {
-    parseDate(timestamp) {
-      const date = timestamp.toDate();
-      const minutes = `${date.getMinutes()}`.padStart(2, "0");
-      const hours = `${date.getHours()}`.padStart(2, "0");
-      const day = `${date.getDate()}`.padStart(2, "0");
-      const month = `${date.getMonth() + 1}`.padStart(2, "0");
-      const year = date.getFullYear();
-      return `${day}.${month}.${year} ${hours}:${minutes}`;
-    },
     parseStatus(status) {
       return {
         created: "создан",

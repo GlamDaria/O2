@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./plugins/firebase";
+import moment from 'moment';
 
 firebase.auth().onAuthStateChanged(user => {
   store.dispatch("fetchUser", user);
@@ -23,6 +24,8 @@ import {
   Badge
 } from "ant-design-vue";
 import firebase from "firebase";
+
+Vue.prototype.$moment = moment;
 
 Vue.use(Button);
 Vue.use(Input);
