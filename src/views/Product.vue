@@ -16,7 +16,7 @@
           {{ product.description }}
         </div>
 
-        <a-button type="primary" class="product__button">
+        <a-button @click="addToCart" type="primary" class="product__button">
           Добавить в корзину
         </a-button>
       </div>
@@ -36,6 +36,11 @@ export default {
   computed: {
     product() {
       return this.$store.getters.getItem;
+    }
+  },
+  methods: {
+    addToCart() {
+      this.$store.dispatch("addCartItem", this.product);
     }
   }
 };

@@ -1,0 +1,1 @@
+.product{display:flex;flex-flow:row nowrap}.product__image{flex-grow:1;flex-shrink:1;flex-basis:50%;margin-right:28px}.product__image img{width:100%}.product__info{flex-grow:1;flex-shrink:1;flex-basis:50%}.product__name{font-size:3rem}.product__price{font-size:2rem;font-weight:700;margin-bottom:16px}.product__button{margin-top:24px}

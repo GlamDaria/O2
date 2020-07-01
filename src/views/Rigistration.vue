@@ -137,3 +137,13 @@ export default {
   color: $main-success;
 }
 </style>
+<style lang="scss">
+@import "src/styles";
+
+.registration__error {
+  color: $main-error;
+}
+.registration__success {
+  color: $main-success;
+}
+</style>

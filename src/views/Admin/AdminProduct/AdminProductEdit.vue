@@ -84,7 +84,9 @@ export default {
   },
   methods: {
     saveProduct() {
-      console.log("save", this.editedProduct);
+      this.$store
+        .dispatch("addItem", this.editedProduct)
+        .then(() => this.$router.push({ name: "AdminProductList" }));
     }
   },
   data() {

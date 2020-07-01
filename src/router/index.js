@@ -1,4 +1,4 @@
-import store from "../store";
+// import store from "../store";
 
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -81,10 +81,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (
-    to.matched.some(record => record.meta.requiresLogin) &&
-    !store.getters.isLoggedIn
-  ) {
+  if (to.meta.requiresLogin && !localStorage.getItem("isLoggedIn")) {
     next("/");
   } else {
     next();

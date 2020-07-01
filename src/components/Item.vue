@@ -41,12 +41,22 @@ export default {
 @import "@/styles";
 .item {
   margin-bottom: 24px;
+  overflow: hidden;
   &:not(:last-child) {
     margin-right: 24px;
   }
 }
 .item__image {
   cursor: pointer;
+  width: 170px;
+  height: 250px;
+  object-fit: cover;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 .item__info {
   cursor: pointer;

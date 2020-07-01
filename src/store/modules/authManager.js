@@ -123,8 +123,10 @@ export default {
           displayName: user.displayName,
           email: user.email
         });
+        localStorage.setItem("isLoggedIn", user.id);
       } else {
         commit("setUser", null);
+        localStorage.removeItem("isLoggedIn");
       }
     }
   }

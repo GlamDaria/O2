@@ -1,13 +1,17 @@
 <template>
   <div class="main-container history">
     <h1>История заказов</h1>
-    <div class="main-history-list">
+    <div v-if="historyList && isLoggenIn" class="main-history-list">
+      <div class="main-history-list__header">
+        <div class="main-history-list__item">Дата заказа</div>
+        <div class="main-history-list__item">Общая стоимость</div>
+        <div class="main-history-list__item">Статус</div>
+      </div>
       <HistoryItem
         v-for="item in historyList"
         :key="item.id"
         :item="item"
         @click="openItemPage(item)"
-        class="history-item"
       />
     </div>
   </div>
@@ -27,6 +31,9 @@ export default {
   computed: {
     historyList() {
       return this.$store.getters.getHistoryList;
+    },
+    isLoggenIn() {
+      return this.$store.getters.isLoggedIn;
     }
   },
   methods: {
@@ -49,5 +56,14 @@ export default {
   width: 100%;
   justify-content: flex-start;
   margin: 16px 0;
+}
+.main-history-list__header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.main-history-list__item {
+  font-weight: bold;
+  font-size: 21px;
 }
 </style>

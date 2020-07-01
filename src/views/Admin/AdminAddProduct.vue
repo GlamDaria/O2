@@ -3,6 +3,11 @@
     <div class="edit-product">
       <div class="product__info">
         <div class="edit-product__field">
+          <div class="edit-product__title">Id товара</div>
+          <a-input v-model="id" type="text" autocomplete="off" />
+        </div>
+
+        <div class="edit-product__field">
           <div class="edit-product__title">Название товара</div>
           <a-input v-model="name" type="text" autocomplete="off" />
         </div>
@@ -38,7 +43,12 @@
           >Отмена
         </a-button>
 
-        <a-button @click="addProduct" type="primary" class="product__button">
+        <a-button
+          @click="addProduct"
+          type="primary"
+          class="product__button"
+          :loading="loading"
+        >
           Добавить
         </a-button>
       </div>
@@ -56,13 +66,19 @@ export default {
         price: this.price,
         imageURL: this.imageURL,
         imageFullSizeURL: this.imageFullSizeURL,
-        description: this.description
+        description: this.description,
+        id: this.id
       };
+    },
+    loading() {
+      return this.$store.getters.isLoading;
     }
   },
   methods: {
     addProduct() {
-      console.log("add", this.newProduct);
+      this.$store
+        .dispatch("addItem", this.newProduct)
+        .then(() => this.$router.push({ name: "AdminProductList" }));
     }
   },
   data() {
@@ -71,7 +87,8 @@ export default {
       price: null,
       imageURL: null,
       imageFullSizeURL: null,
-      description: null
+      description: null,
+      id: null
     };
   }
 };
