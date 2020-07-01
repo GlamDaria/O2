@@ -1,6 +1,6 @@
 <template>
   <div class="header main-container">
-    <div @click="$router.push('/')" class="header__logo">Logo</div>
+    <div @click="$router.push('/')" class="header__logo">Пти-Шу</div>
     <div class="header__content">
       <a-input-search
         v-model="search"
