@@ -2,19 +2,27 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import "./plugins/firebase";
+
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+});
 
 import "ant-design-vue/dist/antd.css";
 import "./styles/index.scss";
 
-import { Button } from "ant-design-vue";
-import { Input } from "ant-design-vue";
-import { InputNumber } from "ant-design-vue";
-import { FormModel } from "ant-design-vue";
-import { Form } from "ant-design-vue";
-import { Icon } from "ant-design-vue";
-import { Modal } from "ant-design-vue";
-import { Menu } from "ant-design-vue";
-import { Badge } from "ant-design-vue";
+import {
+  Button,
+  Input,
+  InputNumber,
+  FormModel,
+  Form,
+  Icon,
+  Modal,
+  Menu,
+  Badge
+} from "ant-design-vue";
+import firebase from "firebase";
 
 Vue.use(Button);
 Vue.use(Input);

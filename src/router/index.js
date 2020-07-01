@@ -1,3 +1,5 @@
+import store from "../store";
+
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
@@ -28,31 +30,37 @@ const routes = [
   {
     path: "/history",
     name: "History",
+    meta: { requiresLogin: true },
     component: () => import("../views/History")
   },
   {
     path: "/admin",
     name: "AdminHome",
+    meta: { requiresLogin: true },
     component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/items",
     name: "AdminProductList",
+    meta: { requiresLogin: true },
     component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/items/:id",
     name: "AdminEditProduct",
+    meta: { requiresLogin: true },
     component: () => import("../views/Admin/AdminProduct/AdminProductEdit")
   },
   {
     path: "/admin/add",
     name: "AdminAddProduct",
+    meta: { requiresLogin: true },
     component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/orders",
     name: "AdminOrderList",
+    meta: { requiresLogin: true },
     component: () => import("../views/Admin/index")
   }
   // {
@@ -70,6 +78,17 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (
+    to.matched.some(record => record.meta.requiresLogin) &&
+    !store.getters.isLoggedIn
+  ) {
+    next("/");
+  } else {
+    next();
+  }
 });
 
 export default router;

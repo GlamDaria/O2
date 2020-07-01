@@ -19,6 +19,13 @@ export default {
   methods: {
     createOrder() {
       console.log("create item");
+      if (this.$store.getters.isLoggedIn) {
+        this.$store.dispatch("createOrder").then(() => {
+          this.$router.push({ name: "History" });
+        });
+      } else {
+        this.$store.commit("setOpenPopup", true);
+      }
     }
   },
   computed: {

@@ -1,3 +1,5 @@
+import firebase from "firebase";
+
 export default {
   state: {
     cart: []
@@ -55,6 +57,25 @@ export default {
       } else {
         commit("pushCartItem", product);
       }
+    },
+    createOrder({ commit, getters }) {
+      commit("setLoading", true);
+      const newOrder = {
+        createdAt: new Date(),
+        userId: getters.getUser.id,
+        status: "created",
+        cart: getters.getCartList,
+        price: getters.getTotalPrice
+      };
+      return firebase
+        .firestore()
+        .collection("orders")
+        .add(newOrder)
+        .then(r => {
+          console.log("order created", r);
+          commit("setLoading", false);
+          commit("setCartList", []);
+        });
     }
   }
 };

@@ -17,12 +17,22 @@
       </a-badge>
 
       <a-button
+        v-if="!isLoggedIn"
         @click="openAuthPopup(true)"
         type="primary"
         class="header__button"
       >
         Войти
       </a-button>
+      <template v-else>
+        <a-button @click="go('History')" class="header__button">
+          Мои заказы
+        </a-button>
+
+        <a-button @click="signOut()" class="header__button">
+          Выйти
+        </a-button>
+      </template>
     </div>
 
     <LoginPopup :visible="visibleAuthPopup" />
@@ -42,6 +52,9 @@ export default {
     },
     badgeCount() {
       return this.$store.getters.getCartItemCount;
+    },
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
     }
   },
   methods: {
@@ -53,6 +66,13 @@ export default {
     },
     openAuthPopup(value) {
       this.$store.commit("setOpenPopup", value);
+    },
+    signOut() {
+      this.$store.dispatch("signOut").then(() => {
+        this.$router.push({
+          name: "Home"
+        });
+      });
     }
   },
   data: () => {

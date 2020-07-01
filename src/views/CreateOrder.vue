@@ -1,6 +1,6 @@
 <template>
   <div class="registration main-container">
-    <h1>Регистрация</h1>
+    <h1>Оформление заказа</h1>
     <a-form-model
       ref="ruleForm"
       :model="ruleForm"
@@ -8,11 +8,11 @@
       v-bind="layout"
     >
       <a-form-model-item has-feedback label="Имя" prop="name">
-        <a-input v-model="ruleForm.name" type="text" autocomplete="off" />
+        <a-input v-model="name" type="text" autocomplete="off" />
       </a-form-model-item>
 
       <a-form-model-item has-feedback label="Email" prop="email">
-        <a-input v-model="ruleForm.email" type="email" autocomplete="off" />
+        <a-input v-model="email" type="email" autocomplete="off" />
       </a-form-model-item>
 
       <a-form-model-item has-feedback label="Пароль" prop="pass">

@@ -45,6 +45,10 @@
         Войти
       </a-button>
 
+      <div v-if="authError" class="login-form__error">
+        {{ authError }}
+      </div>
+
       <div>
         Еще нет аккаунта?
         <a @click="go('Registration')" class="login-form__link"
@@ -75,6 +79,9 @@ export default {
   computed: {
     loading() {
       return this.$store.getters.isLoading;
+    },
+    authError() {
+      return this.$store.getters.getAuthError;
     }
   },
   methods: {
@@ -96,13 +103,18 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          console.log("Received values of form: ", values);
           this.$store.commit("setLoading", true);
-          this.$store.dispatch("signUp", values).then(result => {
-            console.log("result", result);
-            this.$store.commit("setLoading", false);
-            this.$store.commit("setOpenPopup", false);
-          });
+          this.$store
+            .dispatch("signUp", values)
+            .then(() => {
+              this.$store.commit("setOpenPopup", false);
+            })
+            .catch(data => {
+              console.log("auth error loginform", data);
+            })
+            .finally(() => {
+              this.$store.commit("setLoading", false);
+            });
         }
       });
     }
@@ -115,5 +127,9 @@ export default {
   color: $main-color;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.login-form__error {
+  color: $main-error;
 }
 </style>
