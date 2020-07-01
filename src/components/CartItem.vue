@@ -4,12 +4,13 @@
       <img :src="item.imageURL" />
     </div>
 
-    <div class="cart-item__name">{{ item.name }}</div>
+    <div id="itemName" class="cart-item__name">{{ item.name }}</div>
 
-    <div class="cart-item__price">{{ item.price }} ₽</div>
+    <div id="itemPrice" class="cart-item__price">{{ item.price }} ₽</div>
 
     <div class="cart-item__count">
       <a-input-number
+        id="itemCount"
         :value="item.count"
         :min="0"
         :max="100"
@@ -18,7 +19,7 @@
     </div>
 
     <div>
-      <a-button @click="removeItem(item)" icon="delete" size="large" />
+      <a-button id="removeButton" @click="removeItem(item)" icon="delete" size="large" />
     </div>
   </div>
 </template>
@@ -28,7 +29,7 @@ export default {
   props: {
     item: {
       type: Object,
-      required: true
+      required: true,
     }
   },
   data() {

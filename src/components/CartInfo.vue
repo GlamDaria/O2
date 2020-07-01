@@ -1,9 +1,9 @@
 <template>
   <div class="cart-actions">
     <h2>Общая сумма заказа:</h2>
-    <div class="cart-actions__price">{{ getFullPrice }} ₽</div>
+    <div id="fullPrice" class="cart-actions__price">{{ getFullPrice }} ₽</div>
 
-    <a-button type="primary" html-type="button" @click="createOrder">
+    <a-button id="createOrder" type="primary" html-type="button" @click="createOrder">
       Оформить заказ
     </a-button>
   </div>
