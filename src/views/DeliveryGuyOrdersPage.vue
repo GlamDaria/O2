@@ -1,50 +1,48 @@
 <template>
   <div class="main-container history">
-    <h1>История заказов</h1>
-    <div v-if="historyList && isLoggenIn" class="main-history-list">
+    <h1>Принятые вами заказы</h1>
+    <div v-if="currentOrderList && isLoggenIn" class="main-history-list">
       <div class="main-history-list__header">
         <div class="main-history-list__item">Дата заказа</div>
-        <div class="main-history-list__item">Общая стоимость</div>
         <div class="main-history-list__item">Статус</div>
       </div>
-      <HistoryItem
-        v-for="item in historyList"
+      <CurrentOrderItem
+        v-for="item in currentOrderList"
         :key="item.id"
         :item="item"
-        @click="openItemPage(item)"
+        isDelivery
+        @confirm="confirmHasDelivered(item)"
       />
+    </div>
+    <div v-else class="spinner_conteiner">
+      <a-spin />
     </div>
   </div>
 </template>
 
 <script>
-import HistoryItem from "../components/HistoryItem";
+import CurrentOrderItem from "../components/CurrentOrderItem";
 
 export default {
-  name: "History",
+  name: "DeliveryGuyOrders",
   components: {
-    HistoryItem
-  },
+    CurrentOrderItem
+  },  
   created() {
-    this.$store.dispatch("updateHistoryList");
+    setTimeout(() => this.$store.dispatch("updateDeliveryGuyOrders"), 3000);
   },
   computed: {
-    historyList() {
-      return this.$store.getters.getHistoryList;
+    currentOrderList() {
+      return this.$store.getters.getDeliveryGuyOrders;
     },
     isLoggenIn() {
       return this.$store.getters.isLoggedIn;
     }
   },
   methods: {
-    // openItemPage({ id }) {
-    //   console.log("router push", { id });
-    //   this.$router.push({ name: "Product", params: { id: id } });
-    // }
-    // addToCart(product) {
-    //   console.log(product);
-    //   this.$store.dispatch("addCartItem", product);
-    // }
+    confirmHasDelivered(item) {
+      this.$store.dispatch("finishOrder", item.id);
+    }
   }
 };
 </script>
@@ -66,5 +64,12 @@ export default {
 .main-history-list__item {
   font-weight: bold;
   font-size: 21px;
+}
+.spinner_conteiner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60vh;
 }
 </style>

@@ -65,7 +65,8 @@ export default {
         userId: getters.getUser.id,
         status: "created",
         cart: getters.getCartList,
-        price: getters.getTotalPrice
+        price: getters.getTotalPrice,
+        deliveryGuyId: null,
       };
       return firebase
         .firestore()

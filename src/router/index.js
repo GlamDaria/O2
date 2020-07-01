@@ -62,6 +62,16 @@ const routes = [
     name: "AdminOrderList",
     meta: { requiresLogin: true },
     component: () => import("../views/Admin/index")
+  },
+  {
+    path: "/delivery/active-orders",
+    name: "CurrentDeliveryOrders",
+    component: () => import ("../views/CurrentDeliveryOrders")
+  },
+  {
+    path: "/delivery/my-orders",
+    name: "DeliveryGuyOrders",
+    component: () => import ("../views/DeliveryGuyOrdersPage")
   }
   // {
   //   path: "/about",

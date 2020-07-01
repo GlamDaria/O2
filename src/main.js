@@ -21,7 +21,9 @@ import {
   Icon,
   Modal,
   Menu,
-  Badge
+  Badge,
+  Popconfirm,
+  Spin
 } from "ant-design-vue";
 import firebase from "firebase";
 
@@ -36,6 +38,8 @@ Vue.use(Icon);
 Vue.use(Modal);
 Vue.use(Menu);
 Vue.use(Badge);
+Vue.use(Popconfirm);
+Vue.use(Spin);
 
 Vue.config.productionTip = false;
 

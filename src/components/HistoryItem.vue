@@ -2,9 +2,9 @@
   <div v-if="item" class="history-item">
     <div class="history-item__header">
       <div class="history-item__createdAt">
-        {{ $moment.unix(item.createdAt).format('LLL') }}
+        {{ parseDate(item.createdAt) }}
       </div>
-      <div class="history-item__price">{{ item.price }} ₽</div>
+      <div v-if="!isDelivery" class="history-item__price">{{ item.price }} ₽</div>
       <div class="history-item__status">
         {{ parseStatus(item.status) }}
       </div>
@@ -34,9 +34,16 @@ export default {
     item: {
       type: Object,
       required: true
+    },
+    isDelivery: {
+      type: Boolean
     }
   },
   methods: {
+    parseDate(timestamp) {
+      const date = timestamp.toDate();
+      return this.$moment(date).format('L');
+    },
     parseStatus(status) {
       return {
         created: "создан",
@@ -60,6 +67,7 @@ export default {
   background-color: #f0f0f0;
   border-radius: 4px;
   padding: 8px 16px;
+  cursor: pointer;
 }
 
 .history-item__header {
