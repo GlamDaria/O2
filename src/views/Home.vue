@@ -25,7 +25,11 @@ export default {
   },
   computed: {
     itemList() {
-      return this.$store.getters.getItemList;
+      if (this.$store.getters.getSearch.length) {
+        return this.$store.getters.getFilteredItemList;
+      } else {
+        return this.$store.getters.getItemList;
+      }
     }
   },
   methods: {

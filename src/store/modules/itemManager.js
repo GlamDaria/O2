@@ -3,7 +3,8 @@ import firebase from "firebase";
 export default {
   state: {
     itemList: null,
-    item: null
+    item: null,
+    search: ""
   },
   getters: {
     getItemList(state) {
@@ -11,6 +12,16 @@ export default {
     },
     getItem(state) {
       return state.item;
+    },
+    getSearch(state) {
+      return state.search;
+    },
+    getFilteredItemList(state) {
+      return state.itemList.filter(item => {
+        return (
+          item.name.toLowerCase().indexOf(state.search.toLowerCase()) !== -1
+        );
+      });
     }
   },
   mutations: {
@@ -19,6 +30,9 @@ export default {
     },
     setItem(state, value) {
       state.item = value;
+    },
+    setSearch(state, value) {
+      state.search = value;
     }
   },
   actions: {
