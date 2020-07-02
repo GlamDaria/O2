@@ -6,7 +6,7 @@ export default {
     isLoggedIn: false,
     authError: null,
     registrationError: null,
-    openAuthPopup: false
+    openAuthPopup: false,
   },
   getters: {
     getUser(state) {
@@ -115,15 +115,30 @@ export default {
           throw error;
         });
     },
-    fetchUser({ commit }, user) {
-      commit("setLoggedIn", user !== null);
-      if (user) {
-        commit("setUser", {
+    setRole({ commit }, user) {
+      return firebase
+        .firestore()
+        .collection("roles")
+        .doc(user.uid)
+        .get()
+        .then(data => {
+          commit("setUser", {
           id: user.uid,
           displayName: user.displayName,
-          email: user.email
+          email: user.email,
+          role: data.data().role,
+          //role 0 = admin
+          // role 1 = delivery
+          // role 2 = customer
         });
         localStorage.setItem("isLoggedIn", user.id);
+        localStorage.setItem("roleId", data.data().role);
+        });
+    },
+    fetchUser({ dispatch, commit }, user) {
+      commit("setLoggedIn", user !== null);
+      if (user) {
+        dispatch('setRole', user)
       } else {
         commit("setUser", null);
         localStorage.removeItem("isLoggedIn");

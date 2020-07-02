@@ -30,47 +30,73 @@ const routes = [
   {
     path: "/history",
     name: "History",
-    meta: { requiresLogin: true },
+    meta: { 
+      requiresLogin: true,
+      role: '2',
+      },
     component: () => import("../views/History")
   },
   {
     path: "/admin",
     name: "AdminHome",
-    meta: { requiresLogin: true },
+    meta: { 
+      requiresLogin: true,
+      role: '0',
+      },
     component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/items",
     name: "AdminProductList",
-    meta: { requiresLogin: true },
+    meta: { 
+      requiresLogin: true,
+      role: '0',
+      },
     component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/items/:id",
     name: "AdminEditProduct",
-    meta: { requiresLogin: true },
+    meta: { 
+      requiresLogin: true,
+      role: '0',
+      },
     component: () => import("../views/Admin/AdminProduct/AdminProductEdit")
   },
   {
     path: "/admin/add",
     name: "AdminAddProduct",
-    meta: { requiresLogin: true },
+    meta: { 
+      requiresLogin: true,
+      role: '0',
+      },
     component: () => import("../views/Admin/index")
   },
   {
     path: "/admin/orders",
     name: "AdminOrderList",
-    meta: { requiresLogin: true },
+    meta: { 
+      requiresLogin: true,
+      role: '0',
+      },
     component: () => import("../views/Admin/index")
   },
   {
     path: "/delivery/active-orders",
     name: "CurrentDeliveryOrders",
+    meta: { 
+      requiresLogin: true,
+      role: '1',
+      },
     component: () => import ("../views/CurrentDeliveryOrders")
   },
   {
     path: "/delivery/my-orders",
     name: "DeliveryGuyOrders",
+    meta: { 
+      requiresLogin: true,
+      role: '1',
+      },
     component: () => import ("../views/DeliveryGuyOrdersPage")
   }
   // {
@@ -91,7 +117,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresLogin && !localStorage.getItem("isLoggedIn")) {
+/*  if (to.meta.requiresLogin && !localStorage.getItem("isLoggedIn")) {
+    next("/");
+  } else {
+    next();
+  }*/
+
+  if (to.meta.role && localStorage.getItem("roleId") !== to.meta.role) {
     next("/");
   } else {
     next();

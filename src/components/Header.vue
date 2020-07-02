@@ -10,11 +10,32 @@
       />
     </div>
     <div class="header__action-list">
-      <a-badge :count="badgeCount" class="header__button">
-        <a-button type="primary" @click="go('Cart')">
-          Корзина
+       <a-badge v-if="userRole === '2' || !userRole" :count="badgeCount" class="header__button">
+          <a-button type="primary" @click="go('Cart')">
+            Корзина
+          </a-button>
+        </a-badge>
+        <a-button v-if="userRole === '2'" @click="go('History')" class="header__button">
+            Мои заказы
         </a-button>
-      </a-badge>
+
+      <template v-else-if="userRole === '1'">
+        <a-button class="header__button" type="primary" @click="go('CurrentDeliveryOrders')">
+            Активные заказы
+        </a-button>
+        <a-button @click="go('DeliveryGuyOrders')" class="header__button">
+            Мои заказы
+        </a-button>
+      </template>
+      
+      <template v-else-if="userRole === '0'">
+        <a-button class="header__button" type="primary" @click="go('AdminHome')">
+            Админ Панель
+        </a-button>
+        <a-button class="header__button" type="primary" @click="go('AdminAddProduct')">
+            Добавить десерт
+        </a-button>
+      </template>
 
       <a-button
         v-if="!isLoggedIn"
@@ -24,15 +45,9 @@
       >
         Войти
       </a-button>
-      <template v-else>
-        <a-button @click="go('History')" class="header__button">
-          Мои заказы
-        </a-button>
-
-        <a-button @click="signOut()" class="header__button">
+      <a-button v-else @click="signOut()" class="header__button">
           Выйти
         </a-button>
-      </template>
     </div>
 
     <LoginPopup :visible="visibleAuthPopup" />
@@ -54,7 +69,11 @@ export default {
       return this.$store.getters.getCartItemCount;
     },
     isLoggedIn() {
+      console.log(this.$store.getters.isLoggedIn)
       return this.$store.getters.isLoggedIn;
+    },
+    userRole() {
+      return this.$store.getters.getUser ? this.$store.getters.getUser.role : '';
     },
     search: {
       get() {
