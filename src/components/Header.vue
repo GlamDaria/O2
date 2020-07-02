@@ -4,7 +4,7 @@
     <div class="header__content">
       <a-input-search
         v-model="search"
-        placeholder="input search text"
+        placeholder="Поиск"
         enter-button
         @search="onSearch"
       />
@@ -55,6 +55,14 @@ export default {
     },
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
+    },
+    search: {
+      get() {
+        return this.$store.getters.getSearch;
+      },
+      set(value) {
+        this.$store.commit("setSearch", value);
+      }
     }
   },
   methods: {
@@ -74,11 +82,6 @@ export default {
         });
       });
     }
-  },
-  data: () => {
-    return {
-      search: ""
-    };
   }
 };
 </script>

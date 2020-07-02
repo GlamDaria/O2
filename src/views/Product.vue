@@ -4,7 +4,6 @@
       <div class="product__image">
         <img :src="product.imageFullSizeURL" />
       </div>
-
       <div class="product__info">
         <div class="product__name">
           {{ product.name }}
