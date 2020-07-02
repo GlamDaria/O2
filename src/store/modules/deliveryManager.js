@@ -5,6 +5,7 @@ export default {
     currentOrdersList: null,
     isLoadingUpdatedDeliveryList: false,
     deliveryGuyOrders: null,
+    isLoadingPersonalList: false,
   },
   getters: {
     getCurrentOrdersList(state) {
@@ -15,6 +16,9 @@ export default {
     },
     getDeliveryGuyOrders(state) {
       return state.deliveryGuyOrders;
+    },
+    getLoadingPersonalList(state) {
+      return state.isLoadingPersonalList;
     }
   },
   mutations: {
@@ -26,6 +30,9 @@ export default {
     },
     setDeliveryGuyOrders(state, value) {
       state.deliveryGuyOrders = value;
+    },
+    setLoadingPersonalList(state, value) {
+      state.isLoadingPersonalList = value
     }
   },
   actions: {
@@ -40,12 +47,12 @@ export default {
           data.forEach(doc => {
             orders.push({ id: doc.id, ...doc.data() });
           });
-          console.log(orders);
+          // console.log(orders);
           commit("setCurrentOrdersList", orders);
         });
     },
     updateOrderStatus({ dispatch, commit, getters }, id) {
-      console.log("update order status", id);
+      // console.log("update order status", id);
       commit("setLoadingUpdatedDeliveryList", true);
        return firebase
         .firestore()
@@ -61,6 +68,7 @@ export default {
         });
     },
     updateDeliveryGuyOrders({ getters, commit }) {
+      commit("setLoadingPersonalList", true);
       return firebase
         .firestore()
         .collection("orders")
@@ -71,8 +79,14 @@ export default {
           data.forEach(doc => {
             orders.push({ id: doc.id, ...doc.data() });
           });
-          console.log(orders);
+          // console.log(orders);
+          orders.sort((a, b) => {
+            if (a.status === 'approved') return -1;
+            if (b.status === 'approved') return 1;
+            return 0;
+          })
           commit("setDeliveryGuyOrders", orders);
+          commit("setLoadingPersonalList", false);
         });
     },
     finishOrder({ dispatch }, id) {

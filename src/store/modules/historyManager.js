@@ -26,6 +26,11 @@ export default {
           data.forEach(doc => {
             orders.push({ id: doc.id, ...doc.data() });
           });
+          orders.sort((a, b) => {
+            if (a.status === 'done') return 1;
+            if (b.status === 'done') return -1;
+            return 0;
+          })
           console.log(orders);
           commit("setHistoryList", orders);
         });

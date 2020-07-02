@@ -1,7 +1,7 @@
 <template>
   <div class="main-container history">
     <h1>Принятые вами заказы</h1>
-    <div v-if="currentOrderList && isLoggenIn" class="main-history-list">
+    <div v-if="currentOrderList && isLoggenIn && !isLoading" class="main-history-list">
       <div class="main-history-list__header">
         <div class="main-history-list__item">Дата заказа</div>
         <div class="main-history-list__item">Статус</div>
@@ -37,6 +37,9 @@ export default {
     },
     isLoggenIn() {
       return this.$store.getters.isLoggedIn;
+    },
+    isLoading() {
+      return this.$store.getters.getLoadingPersonalList;
     }
   },
   methods: {
