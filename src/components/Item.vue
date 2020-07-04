@@ -5,7 +5,12 @@
     </div>
 
     <div class="item__info" @click="$emit('click', item)">
-      <div class="item__name">{{ item.name }}</div>
+      <a-tooltip placement="top">
+        <template slot="title" v-if="item.name.length >= 20">
+          <span>{{ item.name }}</span>
+        </template>
+        <div class="item__name">{{ name }}</div>
+      </a-tooltip>
       <div class="item__price">{{ item.price }} ₽</div>
     </div>
 
@@ -20,6 +25,8 @@
 </template>
 
 <script>
+import { truncate } from 'lodash';
+
 export default {
   name: "Item",
   props: {
@@ -33,7 +40,11 @@ export default {
     }
   },
   methods: {},
-  computed: {}
+  computed: {
+    name() {
+      return truncate(this.item.name, { length: 20 });
+    }
+  }
 };
 </script>
 
@@ -48,7 +59,7 @@ export default {
 }
 .item__image {
   cursor: pointer;
-  width: 170px;
+  width: 250px;
   height: 250px;
   object-fit: cover;
 
@@ -69,4 +80,5 @@ export default {
   font-weight: bold;
   font-size: 1.3rem;
 }
+
 </style>

@@ -18,7 +18,7 @@
       />
     </div>
 
-    <div>
+    <div class="mini-remove-btn">
       <a-button id="removeButton" @click="removeItem(item)" icon="delete" size="large" />
     </div>
   </div>
@@ -73,5 +73,28 @@ export default {
 
 .cart-item__price {
   font-weight: bold;
+}
+
+@media screen and (max-width: 660px) {
+  /* .cart-item__count {
+    display: none;
+  } */
+
+  .cart-item__image {
+    display: none;
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .cart-item__name {
+    grid-column: 1/4;
+  }
+
+  .mini-remove-btn {
+    justify-self: flex-end;
+  }
 }
 </style>

@@ -51,7 +51,7 @@ export default {
   /*grid-template-columns: repeat(5, 1fr);*/
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
+  justify-content: center;
   margin: 16px 0;
 }
 </style>

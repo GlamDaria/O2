@@ -1,7 +1,22 @@
 <template>
   <div class="header main-container">
+    <a-dropdown class="collapseBtn" :trigger="['click']">
+      <a-menu slot="overlay" @click="handleMenuClick">
+        <a-menu-item data-go="Cart" key="1" v-if="userRole === '2' || !userRole"> Корзина </a-menu-item>
+        <a-menu-item data-go="History" key="2" v-if="userRole === '2'"> Мои заказы </a-menu-item>
+        <a-menu-item data-go="AdminHome" key="3" v-if="userRole === '0'"> Админ Панель </a-menu-item>
+        <a-menu-item data-go="AdminAddProduct" key="4" v-if="userRole === '0'"> Добавить десерт </a-menu-item>
+        <a-menu-item data-go="CurrentDeliveryOrders" key="5" v-if="userRole === '1'"> Активные заказы </a-menu-item>
+        <a-menu-item data-go="DeliveryGuyOrders" key="6" v-if="userRole === '1'"> Мои заказы </a-menu-item>
+        <a-menu-item data-go="signIn" key="7" v-if="!isLoggedIn"> Войти </a-menu-item>
+        <a-menu-item data-go="signOut" key="8" v-if="isLoggedIn"> Выйти </a-menu-item>
+      </a-menu>
+      <a-button type="primary" @click="toggleCollapsed">
+        <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
+      </a-button>
+    </a-dropdown>
     <div @click="$router.push('/')" class="header__logo">Пти-Шу</div>
-    <div class="header__content">
+    <div class="header__content" id="a-search">
       <a-input-search
         v-model="search"
         placeholder="Поиск"
@@ -61,6 +76,11 @@ export default {
   components: {
     LoginPopup
   },
+  data() {
+    return {
+      collapsed: true,
+    }
+  },
   computed: {
     visibleAuthPopup() {
       return this.$store.getters.isOpenPopup;
@@ -100,6 +120,17 @@ export default {
           name: "Home"
         });
       });
+    },
+    toggleCollapsed() {
+      this.collapsed = !this.collapsed;
+    },
+    handleMenuClick(e) {
+      if (e.domEvent.originalTarget.dataset.go === 'signOut') 
+        this.signOut();
+      else if (e.domEvent.originalTarget.dataset.go === 'signIn')
+       this.openAuthPopup(true);
+      else
+        this.go(e.domEvent.originalTarget.dataset.go);
     }
   }
 };
@@ -107,6 +138,11 @@ export default {
 
 <style lang="scss">
 @import "@/styles";
+
+.collapseBtn {
+  display: none !important;
+  margin-right: 16px;
+}
 
 .header {
   display: flex;
@@ -137,6 +173,25 @@ export default {
 .header__button {
   &:not(:last-child) {
     margin-right: 16px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  #a-search {
+    display: none;
+  }
+
+  .header__action-list {
+    display: none;
+  }
+
+  .collapseBtn {
+    display: block !important;
+  }
+
+  .header {
+    height: unset;
+    justify-content: space-between;
   }
 }
 </style>

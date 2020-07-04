@@ -54,4 +54,18 @@ export default {
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (max-width: 660px) {
+  .cart {
+    flex-flow: column nowrap;
+  }
+
+  .cart-info {
+    order: 1;
+  }
+
+  .cart-actions {
+    margin-left: unset;
+  }
+}
 </style>

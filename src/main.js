@@ -23,7 +23,9 @@ import {
   Menu,
   Badge,
   Popconfirm,
-  Spin
+  Spin,
+  Tooltip,
+  Dropdown
 } from "ant-design-vue";
 import firebase from "firebase";
 
@@ -40,6 +42,8 @@ Vue.use(Menu);
 Vue.use(Badge);
 Vue.use(Popconfirm);
 Vue.use(Spin);
+Vue.use(Tooltip);
+Vue.use(Dropdown)
 
 Vue.config.productionTip = false;
 

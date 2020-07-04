@@ -67,4 +67,10 @@ export default {
   font-weight: bold;
   font-size: 21px;
 }
+
+@media screen and (max-width: 660px) {
+  .main-history-list__header {
+    display: none !important;
+  }
+}
 </style>

@@ -80,4 +80,18 @@ export default {
 .product__button {
   margin-top: 24px;
 }
+
+@media screen and (max-width: 740px) {
+  .product {
+    flex-flow: column nowrap;
+  }
+
+  .product__image {
+    margin-right: 0;
+  }
+
+  .product__button {
+    margin-bottom: 24px;
+  }
+}
 </style>

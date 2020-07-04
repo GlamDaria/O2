@@ -100,4 +100,28 @@ export default {
   width: 200px;
   margin-right: 24px;
 }
+
+@media screen and (max-width: 660px) {
+  .history-item__orderHeader {
+    display: none;
+  }
+
+  .history-item__orderItem .orderItem__field:last-child {
+    display: none;
+  }
+
+  .history-item__orderItem {
+    justify-content: space-between;
+  }
+
+  .orderItem__field {
+    width: unset;
+    margin-right: 0;
+  }
+
+  .history-item__price {
+    font-weight: normal;
+    font-size: 14px;
+  }
+}
 </style>
