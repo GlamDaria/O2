@@ -102,6 +102,13 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(email, pass)
         .then(data => {
+          firebase
+          .firestore()
+          .collection("roles")
+          .doc(data.user.uid)
+          .set({
+            role: "2",
+          })
           data.user
             .updateProfile({
               displayName: name
