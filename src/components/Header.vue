@@ -2,14 +2,14 @@
   <div class="header main-container">
     <a-dropdown class="collapseBtn" :trigger="['click']">
       <a-menu slot="overlay" @click="handleMenuClick">
-        <a-menu-item data-go="Cart" key="1" v-if="userRole === '2' || !userRole"> Корзина </a-menu-item>
-        <a-menu-item data-go="History" key="2" v-if="userRole === '2'"> Мои заказы </a-menu-item>
-        <a-menu-item data-go="AdminHome" key="3" v-if="userRole === '0'"> Админ Панель </a-menu-item>
-        <a-menu-item data-go="AdminAddProduct" key="4" v-if="userRole === '0'"> Добавить десерт </a-menu-item>
-        <a-menu-item data-go="CurrentDeliveryOrders" key="5" v-if="userRole === '1'"> Активные заказы </a-menu-item>
-        <a-menu-item data-go="DeliveryGuyOrders" key="6" v-if="userRole === '1'"> Мои заказы </a-menu-item>
-        <a-menu-item data-go="signIn" key="7" v-if="!isLoggedIn"> Войти </a-menu-item>
-        <a-menu-item data-go="signOut" key="8" v-if="isLoggedIn"> Выйти </a-menu-item>
+        <a-menu-item key="Cart" v-if="userRole === '2' || !userRole"> Корзина </a-menu-item>
+        <a-menu-item key="History" v-if="userRole === '2'"> Мои заказы </a-menu-item>
+        <a-menu-item key="AdminHome" v-if="userRole === '0'"> Админ Панель </a-menu-item>
+        <a-menu-item key="AdminAddProduct" v-if="userRole === '0'"> Добавить десерт </a-menu-item>
+        <a-menu-item key="CurrentDeliveryOrders" v-if="userRole === '1'"> Активные заказы </a-menu-item>
+        <a-menu-item key="DeliveryGuyOrders" v-if="userRole === '1'"> Мои заказы </a-menu-item>
+        <a-menu-item key="signIn" v-if="!isLoggedIn"> Войти </a-menu-item>
+        <a-menu-item key="signOut" v-if="isLoggedIn"> Выйти </a-menu-item>
       </a-menu>
       <a-button type="primary" @click="toggleCollapsed">
         <a-icon :type="collapsed ? 'menu-unfold' : 'menu-fold'" />
@@ -125,12 +125,12 @@ export default {
       this.collapsed = !this.collapsed;
     },
     handleMenuClick(e) {
-      if (e.domEvent.originalTarget.dataset.go === 'signOut') 
+      if (e.key === 'signOut') 
         this.signOut();
-      else if (e.domEvent.originalTarget.dataset.go === 'signIn')
+      else if (e.key === 'signIn')
        this.openAuthPopup(true);
       else
-        this.go(e.domEvent.originalTarget.dataset.go);
+        this.go(e.key);
     }
   }
 };
